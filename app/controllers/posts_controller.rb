@@ -10,8 +10,8 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new
-    if @post.save(post_params)
+    @post = Post.new(post_params)
+    if @post.save
       flash[:notice] = "Successfully created post!"
       redirect_to post_path(@post)
     else
@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   def update
     if @post.update_attributes(post_params)
       flash[:notice] = "Successfully updated post!"
-      redirect_to post_path(@posts)
+      redirect_to post_path(@post)
     else
       flash[:alert] = "Error updating post!"
       render :edit
